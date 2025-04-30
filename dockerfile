@@ -29,21 +29,28 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
     bash /tmp/miniconda.sh -b -p /opt/conda && \
     rm /tmp/miniconda.sh
 
-    RUN git clone https://github.com/MagicBOTAlex/MLEyeTrack.git && cd /app/MLEyeTrack/ && git fetch
-    WORKDIR /app/MLEyeTrack/
-
-COPY models ./models/
-COPY environment.yml .
-
+WORKDIR /app/MLEyeTrack/
 ENV PATH="/opt/conda/bin:${PATH}"
 RUN /opt/conda/bin/conda init
+COPY environment.yml .
 RUN conda env create -f environment.yml
 SHELL ["conda", "run", "-n", "et", "/bin/bash", "-c"]
+
+
+
+
+
+COPY models ./models/
+
 
 # ## CUDA SUPPORT
 RUN pip uninstall -y onnxruntime onnxruntime-gpu
 RUN pip install onnxruntime-gpu
 
+# WORKDIR /app/
+# RUN git clone https://github.com/MagicBOTAlex/MLEyeTrack.git
+# WORKDIR /app/MLEyeTrack/
+COPY ./MLEyeTrack .
 
 COPY ./Settings.json .
 

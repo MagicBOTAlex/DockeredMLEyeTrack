@@ -1,7 +1,9 @@
 #!/bin/sh
-set -e           # ← exit on any command failure
-
 IMAGE_NAME="eyetrack"
+
+git clone https://github.com/MagicBOTAlex/MLEyeTrack.git
+
+set -e           # ← exit on any command failure
 
 echo "Building Docker image..."
 docker build -t "$IMAGE_NAME" .
