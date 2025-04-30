@@ -37,11 +37,7 @@ RUN conda env create -f environment.yml
 SHELL ["conda", "run", "-n", "et", "/bin/bash", "-c"]
 
 
-
-
-
-COPY models ./models/
-
+# models loaded from host
 
 # ## CUDA SUPPORT
 RUN pip uninstall -y onnxruntime onnxruntime-gpu

@@ -13,4 +13,4 @@ docker stop  "$IMAGE_NAME" 2>/dev/null || true
 docker rm    "$IMAGE_NAME" 2>/dev/null || true
 
 echo "Running the container..."
-docker run --gpus=all --network=host --shm-size=1g --name $IMAGE_NAME -it "$IMAGE_NAME"
+docker run --gpus=all --network=host --shm-size=1g -v "$(pwd)/models:/app/MLEyeTrack/models" --name $IMAGE_NAME -it "$IMAGE_NAME"
